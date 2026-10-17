@@ -478,6 +478,8 @@ Requirements
 Bug fixes
 ==========
 
+- :class:`braindecode.augmentation.AugmentedDataLoader` with ``n_augmentation > 0`` rejects a transform that changes the shape of ``X`` or ``y`` — e.g. :class:`braindecode.augmentation.LabelSmoothing`, which replaces class-index targets with distributions — with a :class:`ValueError` explaining that ``n_augmentation = 0`` should be used instead; the combination previously failed with ``RuntimeError: Tensors must have the same number of dimensions`` from inside ``torch.cat`` (:gh:`XXXX` by `Li Qing`_).
+
 - The DDP tests of EEGCLIP, BrainOmni and NeuroRVQ no longer abort intermittently (SIGABRT during interpreter teardown of a spawned rank): ranks that succeeded exit with ``os._exit(0)`` (:gh:`1438` by `Bruno Aristimunha`_).
 
 - :class:`braindecode.augmentation.Mixup` keeps its output in the transform's
